@@ -1,0 +1,6 @@
+propiedad1: papa
+propiedad2: yuca
+propiedad3: arroz
+propiedad4: panela
+propiedad5: pan
+

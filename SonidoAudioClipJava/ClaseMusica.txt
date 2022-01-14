@@ -1,0 +1,63 @@
+
+
+import java.applet.AudioClip;
+import java.io.File;
+import java.io.IOException;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+
+public class LectorMusica implements AudioClip {
+    
+    Clip sound;
+    AudioInputStream aS;
+    String songName;
+    
+    public LectorMusica(){
+        
+        try{
+            sound = AudioSystem.getClip();
+        }
+        catch(LineUnavailableException e1){
+            System.out.print("Error 1");
+        }
+    }
+    
+    public void inicializarClip(String ubicacion){
+        try{
+            aS= AudioSystem.getAudioInputStream(new File(ubicacion));
+            sound.open(aS);
+            sound.setFramePosition(0);
+        }
+        catch(LineUnavailableException e1){
+            System.out.print("Error 1");
+        }
+        catch(UnsupportedAudioFileException e2){
+             System.out.print("Archivo  no soportado");
+        }
+        catch(IOException e3){
+            System.out.print("No se encontró el archivo");
+        }
+    }
+    
+    
+       
+    @Override
+    public void play() {
+        sound.start();
+    }
+
+    @Override
+    public void loop() {
+        sound.loop(10);
+    }
+
+    @Override
+    public void stop() {
+        sound.stop();
+        sound.close();
+    }
+     
+}
